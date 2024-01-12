@@ -52,5 +52,24 @@ namespace AssetTrackingEntityFramework
             db.Computers.Update(assetFromDb);
             db.SaveChanges();
         }
+        public override void DeleteItem()
+        {
+            MyDbContext ctx = new MyDbContext();
+            Console.Write("Are you sure you want to delete (y/n)?");
+            string input = Console.ReadLine();
+
+            if (input.ToLower() == "n") return;
+
+            else if( input.ToLower() == "y")
+            {
+                var computer = ctx.Computers.FirstOrDefault(c => c.Id == Id);
+                ctx.Computers.Remove(computer);
+                ctx.SaveChanges();
+                Console.WriteLine("Asset deleted");
+            }
+            else {
+                Console.WriteLine("Enter a valid value.");
+            }
+        }
     }
 }

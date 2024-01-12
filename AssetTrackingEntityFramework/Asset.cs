@@ -16,6 +16,7 @@ namespace AssetTrackingEntityFramework
         public DateTime EndOfLife { get; set; }
 
         public abstract void EditItem();
+        public abstract void DeleteItem();
         
     }
 }
