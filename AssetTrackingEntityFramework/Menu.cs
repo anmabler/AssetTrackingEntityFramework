@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +15,9 @@ namespace AssetTrackingEntityFramework
             Console.WriteLine("Choose a number:");
             Console.WriteLine("1. Add new asset");
             Console.WriteLine("2. Show all assets");
+            Console.WriteLine("3. Edit asset");
+            Console.WriteLine("4. Delete asset");
+            Console.WriteLine("5. Exit");
 
             Console.Write("Enter your selection: ");
             string menuInput = Console.ReadLine();
@@ -26,6 +30,14 @@ namespace AssetTrackingEntityFramework
                 case "2":
                     displayAssetList();
                     mainMenu();
+                    break;
+                case "3":
+                    editAsset();
+                    break;
+                case "4":
+                    break;
+                case "5":
+                    Console.WriteLine("Closing application...");
                     break;
                 default:
                     Console.WriteLine("Please enter a valid number.");
@@ -101,10 +113,10 @@ namespace AssetTrackingEntityFramework
 
 
         }
-        private void displayAssetList()
+
+        private List<Asset> getListFromDb()
         {
             MyDbContext db = new MyDbContext();
-            Console.WriteLine("-----------------");
 
             // Reads from db.
             var computers = db.Computers.ToList();
@@ -113,6 +125,14 @@ namespace AssetTrackingEntityFramework
             List<Asset> assets = [.. computers, .. phones];
             // ! Sort order: Type, purchase date. 
             assets = assets.OrderBy(x => x.GetType().Name).ThenBy(x => x.PurchaseDate).ToList();
+            return assets;
+        } 
+        private void displayAssetList()
+        {
+            var assets = getListFromDb();
+
+            Console.WriteLine("Brand".PadRight(16) + "Model".PadRight(16) + "Price".PadRight(16) + "Purchase date".PadRight(16) + "End of life".PadRight(16) + "Type" );
+
             foreach (var asset in assets )
             {
                 TimeSpan timeSpan = asset.EndOfLife - DateTime.Now;
@@ -129,6 +149,13 @@ namespace AssetTrackingEntityFramework
                 }
             }
            
+        }
+
+        private void editAsset()
+        {
+            MyDbContext myDbContext = new MyDbContext();
+            Console.WriteLine("Choose an item to edit:");
+            
         }
 
     }
