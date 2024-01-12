@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace AssetTrackingEntityFramework
 {
-    internal class Phone
+    internal class Phone: Asset
     {
         public int Id { get; set; }
-        public string Brand { get; set; }
-        public string Model { get; set; }
-        public DateTime PurchaseDate { get; set; }
-        public int Price { get; set; }
-        public DateTime EndOfLife { get; set; }
+        //public string Brand { get; set; }
+        //public string Model { get; set; }
+        //public DateTime PurchaseDate { get; set; }
+        //public int Price { get; set; }
+        //public DateTime EndOfLife { get; set; }
 
         public Phone () { }
 
@@ -27,7 +27,7 @@ namespace AssetTrackingEntityFramework
         }
         public override string ToString()
         {
-            return $"{Brand} {Model} {Price} {PurchaseDate} {EndOfLife} {this.GetType().Name}";
+            return $"{Brand.PadRight(15)} {Model.PadRight(15)} {Price.ToString().PadRight(15)} {PurchaseDate.ToShortDateString().PadRight(15)} {EndOfLife.ToShortDateString().PadRight(15)} {this.GetType().Name}";
         }
     }
 }

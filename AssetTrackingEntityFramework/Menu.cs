@@ -106,15 +106,14 @@ namespace AssetTrackingEntityFramework
             MyDbContext db = new MyDbContext();
             Console.WriteLine("-----------------");
 
-            // Using ArrayList as I want to display both computers and phones from the same list
-            ArrayList assetList = new ArrayList();
             // Reads from db.
             var computers = db.Computers.ToList();
             var phones = db.Phones.ToList();
-            assetList.AddRange(computers);
-            assetList.AddRange(phones);
 
-            foreach (var asset in assetList )
+            List<Asset> assets = [.. computers, .. phones];
+            assets = assets.OrderBy(x => x.GetType().Name).ThenBy(x => x.PurchaseDate).ToList();
+            // ! Sort order: Type, purchase date. 
+            foreach (var asset in assets )
             {
                 Console.WriteLine($"{asset.ToString()}");
             }
