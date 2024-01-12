@@ -127,12 +127,17 @@ namespace AssetTrackingEntityFramework
             assets = assets.OrderBy(x => x.GetType().Name).ThenBy(x => x.PurchaseDate).ToList();
             return assets;
         } 
+
+        private string listHeading()
+        {
+            string listString = "Brand".PadRight(16) + "Model".PadRight(16) + "Price".PadRight(16) + "Purchase date".PadRight(16) + "End of life".PadRight(16) + "Type";
+            return listString;
+        }
         private void displayAssetList()
         {
             var assets = getListFromDb();
 
-            Console.WriteLine("Brand".PadRight(16) + "Model".PadRight(16) + "Price".PadRight(16) + "Purchase date".PadRight(16) + "End of life".PadRight(16) + "Type" );
-
+            Console.WriteLine(listHeading());
             foreach (var asset in assets )
             {
                 TimeSpan timeSpan = asset.EndOfLife - DateTime.Now;
