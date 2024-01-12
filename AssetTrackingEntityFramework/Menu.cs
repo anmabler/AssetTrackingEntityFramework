@@ -111,11 +111,22 @@ namespace AssetTrackingEntityFramework
             var phones = db.Phones.ToList();
 
             List<Asset> assets = [.. computers, .. phones];
-            assets = assets.OrderBy(x => x.GetType().Name).ThenBy(x => x.PurchaseDate).ToList();
             // ! Sort order: Type, purchase date. 
+            assets = assets.OrderBy(x => x.GetType().Name).ThenBy(x => x.PurchaseDate).ToList();
             foreach (var asset in assets )
             {
-                Console.WriteLine($"{asset.ToString()}");
+                TimeSpan timeSpan = asset.EndOfLife - DateTime.Now;
+                // Marks items as red if timespan is less than or equal to 90 days
+                if(timeSpan.Days <= 90)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"{asset.ToString()}");
+                    Console.ResetColor() ;
+                }
+                else
+                {
+                    Console.WriteLine($"{asset.ToString()}");
+                }
             }
            
         }
