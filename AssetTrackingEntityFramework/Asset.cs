@@ -15,6 +15,7 @@ namespace AssetTrackingEntityFramework
         public int Price { get; set; }
         public DateTime EndOfLife { get; set; }
 
+        public abstract void EditItem();
         
     }
 }

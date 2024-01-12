@@ -33,6 +33,7 @@ namespace AssetTrackingEntityFramework
                     break;
                 case "3":
                     editAsset();
+                    mainMenu();
                     break;
                 case "4":
                     break;
@@ -159,8 +160,42 @@ namespace AssetTrackingEntityFramework
         private void editAsset()
         {
             MyDbContext myDbContext = new MyDbContext();
-            Console.WriteLine("Choose an item to edit:");
-            
+            Console.WriteLine(listHeading());
+
+            var assetList = getListFromDb();
+
+            for (int i = 0; i < assetList.Count; i++)
+            {
+                Console.WriteLine($"{i} {assetList[i].ToString()}");
+            }
+
+            bool isInt = false;
+            int value;
+            do
+            {
+                Console.Write("Choose an item to edit:");
+                string input = Console.ReadLine();
+                isInt = int.TryParse(input, out value);
+                if (!isInt)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Enter a valid number.");
+                    Console.ResetColor();
+                }
+
+            } while (!isInt || value > assetList.Count -1);
+            // The count is 7 but index 0-6
+
+            // Item from list 
+            var itemToEdit = assetList[value];
+            Console.WriteLine(itemToEdit.GetType().Name);
+
+            Console.WriteLine("Editing: " + itemToEdit.ToString());
+            Console.WriteLine("Enter a new value or keep the field empty to use the old value.");
+            Console.WriteLine("-----------------");
+
+            itemToEdit.EditItem();
+            Console.WriteLine("Asset updated.");
         }
 
     }
