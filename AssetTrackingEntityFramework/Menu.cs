@@ -59,7 +59,7 @@ namespace AssetTrackingEntityFramework
             Console.WriteLine("1. Add computer");
             Console.WriteLine("2. Add phone");
 
-            Console.Write("Enter your selection");
+            Console.Write("Enter your selection: ");
             string assetInput = Console.ReadLine();
 
             if (assetInput != "1" && assetInput != "2")
@@ -87,9 +87,30 @@ namespace AssetTrackingEntityFramework
                 addNewAsset();
             }
 
-            if (assetInput == "1" )
+            // get offices from db
+            var offices = Office.getOfficesFromDb();
+            Console.WriteLine("Choose an office to add device to: ");
+            foreach (var office in offices)
             {
-               Computer computer = new Computer(brandInput, modelInput, value);
+                Console.WriteLine($"{office.Id}. {office.Country}");
+            }
+
+            bool isOfficeInt = false;
+            int officeId;
+
+            do
+            {
+                Console.Write("Enter office id: ");
+                var officeInput = Console.ReadLine();
+                isOfficeInt = int.TryParse(officeInput, out officeId);
+
+
+            } while(!isOfficeInt || !offices.Exists(o => o.Id == officeId));
+    
+
+            if (assetInput == "1")
+            {
+                Computer computer = new Computer(brandInput, modelInput, value, officeId);
                 // Create computer in db.
                 db.Computers.Add(computer);
                 db.SaveChanges();
@@ -98,9 +119,9 @@ namespace AssetTrackingEntityFramework
                 Console.ResetColor();
 
             }
-            else if ( assetInput == "2" )
+            else if (assetInput == "2")
             {
-                Phone phone = new Phone(brandInput, modelInput, value);
+                Phone phone = new Phone(brandInput, modelInput, value, officeId);
                 // Create phone in db.
                 db.Phones.Add(phone);
                 db.SaveChanges();

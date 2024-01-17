@@ -10,13 +10,14 @@ namespace AssetTrackingEntityFramework
     {
         public int Id { get; set; }
         public Computer() { }
-        public Computer (string brand, string model, int price)
+        public Computer (string brand, string model, int price, int officeId)
         {
             Brand = brand;
             Model = model;
             PurchaseDate = DateTime.Now;
             Price = price;
             EndOfLife = DateTime.Now.AddYears(3);
+            OfficeId = officeId;
         }
 
         public override string ToString()

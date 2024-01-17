@@ -8,12 +8,13 @@ namespace AssetTrackingEntityFramework
 {
     internal abstract class Asset
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
         public DateTime PurchaseDate { get; set; }
         public int Price { get; set; }
         public DateTime EndOfLife { get; set; }
+        public int OfficeId { get; set; }
 
         public abstract void EditItem();
         public abstract void DeleteItem();

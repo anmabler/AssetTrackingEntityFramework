@@ -12,13 +12,14 @@ namespace AssetTrackingEntityFramework
 
         public Phone () { }
 
-        public Phone(string brand, string model, int price)
+        public Phone(string brand, string model, int price, int officeId)
         {
             Brand = brand;
             Model = model;
             Price = price;
             PurchaseDate = DateTime.Now;
             EndOfLife = DateTime.Now.AddYears(3);
+            OfficeId = officeId;
         }
         public override string ToString()
         {
