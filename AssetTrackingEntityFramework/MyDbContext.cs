@@ -94,7 +94,7 @@ namespace AssetTrackingEntityFramework
                     Price = 100,
                     EndOfLife = new DateTime(2024, 10, 14),
                     OfficeId = 1
-                });
+                });         
         }
     }
 }

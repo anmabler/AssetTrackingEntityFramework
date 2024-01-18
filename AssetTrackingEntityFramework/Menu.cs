@@ -146,7 +146,15 @@ namespace AssetTrackingEntityFramework
             var computers = db.Computers.ToList();
             var phones = db.Phones.ToList();
 
+            var offices = db.Offices.ToList();
+
             List<Asset> assets = [.. computers, .. phones];
+            // Set office
+            for (int i = 0; i < assets.Count; i++)
+            {
+                var office = offices.Find(o => o.Id == assets[i].OfficeId);
+                assets[i].Office = office;
+            }
             // ! Sort order: Type, purchase date. 
             assets = assets.OrderBy(x => x.GetType().Name).ThenBy(x => x.PurchaseDate).ToList();
             return assets;

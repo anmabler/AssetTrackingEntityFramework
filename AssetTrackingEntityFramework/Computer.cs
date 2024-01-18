@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,11 +19,12 @@ namespace AssetTrackingEntityFramework
             Price = price;
             EndOfLife = DateTime.Now.AddYears(3);
             OfficeId = officeId;
+            Office = Office.getOfficeById(officeId);
         }
 
         public override string ToString()
         {
-            return $"{Brand.PadRight(15)} {Model.PadRight(15)} {Price.ToString().PadRight(15)} {PurchaseDate.ToShortDateString().PadRight(15)} {EndOfLife.ToShortDateString().PadRight(15)} {this.GetType().Name}";
+            return $"{Brand.PadRight(15)} {Model.PadRight(15)} {Price.ToString().PadRight(15)} {PurchaseDate.ToShortDateString().PadRight(15)} {EndOfLife.ToShortDateString().PadRight(15)} {this.GetType().Name.PadRight(15)} {this.Office.Country}";
         }
 
         public override void EditItem()

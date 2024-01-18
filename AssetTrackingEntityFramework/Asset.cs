@@ -15,7 +15,7 @@ namespace AssetTrackingEntityFramework
         public int Price { get; set; }
         public DateTime EndOfLife { get; set; }
         public int OfficeId { get; set; }
-
+        public Office Office { get; set; }
         public abstract void EditItem();
         public abstract void DeleteItem();
         

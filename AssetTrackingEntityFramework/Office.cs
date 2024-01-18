@@ -22,5 +22,12 @@ namespace AssetTrackingEntityFramework
             return dbOffices;
         }
 
+        public static Office getOfficeById(int id)
+        {
+            MyDbContext db = new MyDbContext();
+            var office = db.Offices.FirstOrDefault(o => o.Id == id);
+            return office;
+        }
+
     }
 }
