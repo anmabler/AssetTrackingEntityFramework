@@ -162,7 +162,7 @@ namespace AssetTrackingEntityFramework
 
         private string listHeading()
         {
-            string listString = "Brand".PadRight(16) + "Model".PadRight(16) + "Price".PadRight(16) + "Purchase date".PadRight(16) + "End of life".PadRight(16) + "Type";
+            string listString = "Brand".PadRight(16) + "Model".PadRight(16) + "Price".PadRight(16) + "Purchase date".PadRight(16) + "End of life".PadRight(16) + "Type".PadRight(16) + "Office";
             return listString;
         }
         private void displayAssetList()
